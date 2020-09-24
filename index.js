@@ -91,11 +91,11 @@ Lossnay.prototype = {
           callback(null, this.fanSpeed);
         }.bind(this))
         .on('set', function(value, callback) {
+          setFanSpeed(value);
           callback(null);
         }.bind(this));
 
-      services.push(fanService);
-
-      return services;
+    services.push(fanService);
+    return services;
   }
 }
