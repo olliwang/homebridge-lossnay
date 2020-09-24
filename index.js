@@ -8,7 +8,7 @@ module.exports = function(homebridge) {
   Service = homebridge.hap.Service;
 
   homebridge.registerAccessory("homebridge-lossnay",
-                               "Lossnay ",
+                               "Lossnay",
                                Lossnay);
 }
 
