@@ -1,0 +1,23 @@
+{
+  "name": "homebridge-lossnay",
+  "version": "0.1.0",
+  "description": "Mitsubishi Lossay plugin for homebridge",
+  "keywords": [
+    "homebridge-plugin"
+  ],
+  "author": "Olli Wang",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/olliwang/homebridge-lossnay"
+  },
+  "bugs": {
+    "url": "https://github.com/olliwang/homebridge-lossnay/issues"
+  },
+  "engines": {
+    "node": ">=0.12.0",
+    "homebridge": ">=0.3.1"
+  },
+  "dependencies": {
+    "i2c-bus": "^5.2.0"
+  }
+}
