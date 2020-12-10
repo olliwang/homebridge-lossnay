@@ -24,6 +24,7 @@ function Lossnay(log, config) {
   this.debug = boolValueWithDefault(config.debug, false);
   this.name = config.name || 'Lossnay';
   this.displayName = config.name;
+  this.maxVoltage = 5.0;
 
   this.services = [];
 
@@ -40,8 +41,8 @@ Lossnay.prototype = {
 
     var value = 0;
     if (speed > 0) {
-      const voltage = speed + 1;
-      value = voltage / 5.0 * 4095;
+      const voltage = this.maxVoltage / 4 * speed - 1;
+      value = voltage / this.maxVoltage * 4095;
       if (value > 4095) {
         value = 4095
       }
@@ -74,9 +75,14 @@ Lossnay.prototype = {
     fanService
       .getCharacteristic(Characteristic.Active)
       .on('get', function(callback) {
-        callback(null, true);
+        callback(null, this.fanSpeed > 0);
       }.bind(this))
       .on('set', function(value, callback) {
+        if (!value) {
+          this.setFanSpeed(0);
+        } else {
+          this.setFanSpeed(1);
+        }
         callback(null);
       }.bind(this));
 
