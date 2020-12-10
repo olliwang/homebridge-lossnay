@@ -24,7 +24,7 @@ function Lossnay(log, config) {
   this.debug = boolValueWithDefault(config.debug, false);
   this.name = config.name || 'Lossnay';
   this.displayName = config.name;
-  this.maxVoltage = 5.0;
+  this.maxVoltage = config.maxVoltage || 5.0;
   this.initialFanSpeed = 1;
 
   this.services = [];
