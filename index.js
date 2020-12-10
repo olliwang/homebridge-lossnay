@@ -25,17 +25,20 @@ function Lossnay(log, config) {
   this.name = config.name || 'Lossnay';
   this.displayName = config.name;
   this.maxVoltage = 5.0;
+  this.initialFanSpeed = 1;
 
   this.services = [];
 
-  this.fanSpeed = 1;
+  this.fanSpeed = this.initialFanSpeed;
   this.setFanSpeed(this.fanSpeed);
 }
 
 Lossnay.prototype = {
   setFanSpeed: function(speed) {
-    this.fanSpeed = speed;
-    console.log('[Lossnay] - Set Fan Speed: ' + this.fanSpeed);
+    if (speed > 0) {
+      this.fanSpeed = speed;
+    }
+    console.log('[Lossnay] - Set Fan Speed: ' + speed);
     const DEVICE_ADDRESS = 0x62
     const CMD_WRITEDAC = 0x40
     const CMD_WRITEDACEEPROM = 0x60
@@ -82,7 +85,7 @@ Lossnay.prototype = {
         if (!value) {
           this.setFanSpeed(0);
         } else {
-          this.setFanSpeed(this.fanSpeed);
+          this.setFanSpeed(1);
         }
         callback(null);
       }.bind(this));
