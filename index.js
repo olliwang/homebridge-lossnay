@@ -51,6 +51,7 @@ Lossnay.prototype = {
       if (value > 4095) {
         value = 4095
       }
+      console.log('[Lossnay] - Set Value: ' + value);
     }
 
     new Promise((resolve, reject) => {
