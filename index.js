@@ -35,6 +35,7 @@ function Lossnay(log, config) {
 Lossnay.prototype = {
   setFanSpeed: function(speed) {
     this.fanSpeed = speed;
+    console.log('[Lossnay] - Set Fan Speed: ' + this.fanSpeed);
     const DEVICE_ADDRESS = 0x62
     const CMD_WRITEDAC = 0x40
     const CMD_WRITEDACEEPROM = 0x60
@@ -81,7 +82,7 @@ Lossnay.prototype = {
         if (!value) {
           this.setFanSpeed(0);
         } else {
-          this.setFanSpeed(1);
+          this.setFanSpeed(this.fanSpeed);
         }
         callback(null);
       }.bind(this));
