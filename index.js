@@ -84,8 +84,6 @@ Lossnay.prototype = {
       .on('set', function(value, callback) {
         if (!value) {
           this.setFanSpeed(0);
-        } else {
-          this.setFanSpeed(1);
         }
         callback(null);
       }.bind(this));
