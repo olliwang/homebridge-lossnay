@@ -1,6 +1,6 @@
 {
   "name": "homebridge-lossnay",
-  "version": "0.1.13",
+  "version": "0.1.14",
   "description": "Mitsubishi Lossay plugin for homebridge",
   "keywords": [
     "homebridge-plugin"

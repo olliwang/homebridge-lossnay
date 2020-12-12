@@ -26,6 +26,7 @@ function Lossnay(log, config) {
   this.displayName = config.name;
   this.maxVoltage = config.maxVoltage || 5.0;
   this.initialFanSpeed = 1;
+  this.voltageOffset = config.voltageOffset || 0.0;
 
   this.services = [];
 
@@ -45,13 +46,12 @@ Lossnay.prototype = {
 
     var value = 0;
     if (speed > 0) {
-      var voltage = this.maxVoltage / 4 * speed - 1.5;
+      var voltage = this.maxVoltage / 4 * speed - this.voltageOffset;
       console.log('[Lossnay] - Set Voltage: ' + voltage);
       value = Math.round(voltage / this.maxVoltage * 4095);
       if (value > 4095) {
         value = 4095
       }
-      console.log('[Lossnay] - Set Value: ' + value);
     }
 
     new Promise((resolve, reject) => {
