@@ -45,7 +45,7 @@ Lossnay.prototype = {
 
     var value = 0;
     if (speed > 0) {
-      const voltage = this.maxVoltage / 4 * speed - 1;
+      const voltage = this.maxVoltage / 4 * speed - 0.5;
       console.log('[Lossnay] - Set Voltage: ' + voltage);
       value = Math.round(voltage / this.maxVoltage * 4095);
       if (value > 4095) {
