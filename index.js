@@ -84,10 +84,12 @@ Lossnay.prototype = {
         callback(null, this.fanSpeed > 0);
       }.bind(this))
       .on('set', function(value, callback) {
-        if (!value) {
+        if (value) {
+          callback(null, Characteristic.Active.ACTIVE);
+        } else {
           this.setFanSpeed(0);
+          callback(null, Characteristic.Active.INACTIVE);
         }
-        callback(null);
       }.bind(this));
 
     fanService
