@@ -85,9 +85,11 @@ Lossnay.prototype = {
           callback(null, Characteristic.Active.INACTIVE);
         }
       }.bind(this))
-      .on('set', function(value, callback) {
-        if (!value) {
+      .on('set', function(state, callback) {
+        if (state === 0) {
           this.setFanSpeed(0);
+        } else {
+          this.setFanSpeed(1);
         }
         callback(null);
       }.bind(this));
