@@ -86,6 +86,7 @@ Lossnay.prototype = {
         }
       }.bind(this))
       .on('set', function(state, callback) {
+        console.log("Set Active: " + state);
         if (state === 0) {
           this.setFanSpeed(0);
         } else {
