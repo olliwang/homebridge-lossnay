@@ -31,20 +31,11 @@ function Lossnay(log, config) {
   this.services = [];
 
   this.fanSpeed = -1;
-  this.nextFanSpeed = -1
   this.setFanSpeed(this.initialFanSpeed);
 }
 
 Lossnay.prototype = {
   setFanSpeed: function(speed) {
-    if (speed == this.fanSpeed) {
-      return;
-    }
-    if (this.nextFanSpeed >= 0) {
-      this.nextFanSpeed = speed;
-      return;
-    }
-    this.nextFanSpeed = speed;
     this.fanSpeed = speed;
     console.log('[Lossnay] - Set Fan Speed: ' + speed);
     const DEVICE_ADDRESS = 0x62
@@ -70,13 +61,15 @@ Lossnay.prototype = {
                 return reject(err);
             }
             resolve(bufferWritten, buffer);
-
-            const NEXT_FAN_SPEED = this.nextFanSpeed;
-            this.nextFanSpeed = -1;
-            if (NEXT_FAN_SPEED >= 0 && this.fanSpeed != NEXT_FAN_SPEED) {
-              this.setFanSpeed(NEXT_FAN_SPEED);
-            }
           });
+    });
+  },
+
+  updateFanSpeedAtIntervals: function() {
+    return new Promise((resolve, reject) => {
+      this.setFanSpeed(this.fanSpeed);
+      resolve();
+      setTimeout(this.updateFanSpeedAtIntervals, 10000);
     });
   },
 
@@ -125,6 +118,8 @@ Lossnay.prototype = {
         }.bind(this));
 
     services.push(fanService);
+
+    this.updateFanSpeedAtIntervals();
     return services;
   }
 }
