@@ -37,7 +37,7 @@ function Lossnay(log, config) {
 Lossnay.prototype = {
   setFanSpeed: function(speed) {
     this.fanSpeed = speed;
-    console.log('[Lossnay] - Set Fan Speed: ' + speed);
+    // console.log('[Lossnay] - Set Fan Speed: ' + speed);
     const DEVICE_ADDRESS = 0x62
     const CMD_WRITEDAC = 0x40
     const CMD_WRITEDACEEPROM = 0x60
@@ -45,7 +45,7 @@ Lossnay.prototype = {
     var value = 0;
     if (speed > 0) {
       var voltage = this.maxVoltage / 4 * speed + this.voltageOffset;
-      console.log('[Lossnay] - Set Voltage: ' + voltage);
+      // console.log('[Lossnay] - Set Voltage: ' + voltage);
       value = Math.round(voltage / this.maxVoltage * 4095);
       if (value > 4095) {
         value = 4095
@@ -69,7 +69,7 @@ Lossnay.prototype = {
     return new Promise((resolve, reject) => {
       this.setFanSpeed(this.fanSpeed);
       resolve();
-      setTimeout(this.updateFanSpeedAtIntervals, 10000);
+      setTimeout(this.updateFanSpeedAtIntervals, 60000);
     });
   },
 
